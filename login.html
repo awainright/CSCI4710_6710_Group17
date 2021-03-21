@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Vampire Application</title>
+  <InvalidTag charset="utf-8">
+  <InvalidTag name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <InvalidTag src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <InvalidTag src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<style>
+     
+     body{
+        background-color: honeydew;
+     }
+     h1 {
+        color: blue;
+        font-family: verdana;
+        font-size: 300%;
+    }
+     h4 {
+    
+        color: black;
+        font-family: verdana;
+        font-size: 170%;
+    }
+     p {
+        color: gray;
+        font-family: courier;
+        font-size: 130%;
+  
+     }
+
+ 
+     a{
+        color: blue;
+     }
+    
+     
+</style>
+      <script>
+    function verify(userName, pass){
+      // 0 means no; 1 means yes
+      // var galic = 0;
+      // var shadow = 0;
+      
+      var defaultUser = "Admin";
+      var defaultPass = "12345";
+      
+      if(defaultUser == userName && defaultPass == pass){
+          window.alert("Accepted");
+          window.location.href = "home.html"
+      }else{
+          window.alert("Denied");
+      }
+
+    }
+    
+   
+  </script>
+      
+      
+</head>
+<body>
+<div>
+    <p>Enter user and pass..(Admin, 12345)</p>
+<form>
+    
+    <label for="userName">UserName:</label><br>
+    <input type="text" id="userName" name="userName"><br>
+    <label for="password">Password:</label><br>
+    <input type="text" id="password" name="password">
+
+</form>
+    <button type="button" onclick="verify(document.getElementById('userName').value.toString(),document.getElementById('password').value.toString())">Submit</button>
+      
+</div>
+</body>
