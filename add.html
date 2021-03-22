@@ -58,11 +58,18 @@ a{
 <script>
     
     
+var list = new Array();    
     
     
-    
-    function addClassmate(fName,lName,garlic,shadow,pale){
-       
+    function addClassmate(){
+        var fName = document.getElementById('fname').value.toString();
+        var lName = document.getElementById('lname').value.toString();
+        var garlic = document.getElementById('garlic').value;
+        var shadow = document.getElementById('shadow').value;
+        var pale = document.getElementById('pale').value;
+        var person = {fistname: fName, lastname: lName, noGarlic: garlic, noShadow: shadow, isPale: pale };
+        list.push(person);
+        window.alert(list[0].fistname);
         
     }
     
@@ -103,23 +110,15 @@ a{
     <input type="radio" id="shadow" name="shadow" value="shadow">
     <label for="shadow">Has No Shadow</label><br>
     <input type="radio" id="pale" name="pale" value="pale">
-    <label for="pale">Has a Pale Complexion</label>
+    <label for="pale">Has a Pale Complexion</label><br>
+    <p>Choose your selection method..</p><br>
+    <input type="checkbox" id="threshhold" name="threshhold" value="threshhold">
+    <label for="threshhold">Threshhold Method</label>
+    <input type="checkbox" id="random" name="random" value="random">
+    <label for="random">Random</label>
     <br><br>
-    <button type="button" onclick="addClassmate(document.getElementById('fname').value.toString(),document.getElementById('lname').value.toString(),document.getElementById('garlic').value,document.getElementById('shadow').value,document.getElementById('pale').value)">Add</button>
+    <button type="button"onclick="addClassmate()">Add</button>
 
 </form>
 
-<table id="classmate_table" class="table table-bordered" >
-    <caption>Classmates</caption>
-    <thead>
-      <tr>
-        <th>First</th>
-        <th>Last</th>
-        <th>Hates Garlic</th>
-        <th>No Shadow</th>
-        <th>Pale</th>
-      </tr>
-    </thead>
-  </table>
-    
 </body>
