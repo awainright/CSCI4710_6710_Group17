@@ -19,12 +19,22 @@
 		var chart;
 		var data;
 		var options;
-
-
-		//TODO: loop for getting the number from list for humans and vampire
 		var num_humans = 50;
 		var num_vampire = 5; 
+		//Get reference to list from add.html
+		
 
+		//TODO: loop for getting the number from list for humans and vampire
+		var i;
+		for (i = 0; i < list.length; i++) {
+			if (list[i].vampire) {
+				num_vampire++
+			}
+			else {
+				num_humans++
+			}
+		}
+		
 		function drawChart() {
 
 			// Create the data table
