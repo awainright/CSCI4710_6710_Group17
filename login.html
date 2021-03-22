@@ -25,11 +25,23 @@
         font-size: 170%;
     }
      p {
-        color: gray;
+        text-align: center;
+        color: green;
+        padding: 20px;
         font-family: courier;
         font-size: 130%;
   
      }
+    
+    form{
+        text-align: center;
+        padding: 20px;
+    }
+    
+    button{
+        background-color: blue;
+        color: green;
+    }
 
  
      a{
@@ -70,9 +82,11 @@
     <input type="text" id="userName" name="userName"><br>
     <label for="password">Password:</label><br>
     <input type="text" id="password" name="password">
+    <br><br>
+    <button type="button" onclick="verify(document.getElementById('userName').value.toString(),document.getElementById('password').value.toString())">Submit</button>
 
 </form>
-    <button type="button" onclick="verify(document.getElementById('userName').value.toString(),document.getElementById('password').value.toString())">Submit</button>
+    
       
 </div>
 </body>

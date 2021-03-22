@@ -5,8 +5,8 @@
   <InvalidTag charset="utf-8">
   <InvalidTag name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <InvalidTag src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <InvalidTag src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
  <style>
      
@@ -14,6 +14,7 @@ body{
     background-color: honeydew;
 }
 h1 {
+  text-align: center;
   color: blue;
   font-family: verdana;
   font-size: 300%;
@@ -25,18 +26,49 @@ h4 {
   font-size: 170%;
 }
 p {
+  text-align: center;
+  padding: 20px;
   color: gray;
   font-family: courier;
   font-size: 130%;
   
 }
+     form{
+        text-align: center;
+        padding: 20px;
+    }
+    
+    button{
+        background-color: blue;
+        color: green;
+    }
+
 
  
 a{
     color: blue;
 }
+     table{
+         background-color: white;
+         color: black;
+     }
      
   </style>
+
+<script>
+    
+    
+    
+    
+    
+    function addClassmate(fName,lName,garlic,shadow,pale){
+       
+        
+    }
+    
+   
+</script>
+      
 </head>
 <body>
 
@@ -58,5 +90,36 @@ a{
 
   </div>
 </nav>
-    <p>Adding classmate</p>
+    <h1>Add a new classmate</h1>
+    <br><br>
+<form>
+    
+    <label for="fname">First Name:</label><br>
+    <input type="text" id=fname name="fname"><br>
+    <label for="lname">Last Name:</label><br>
+    <input type="text" id="lname" name="lname"><br>
+    <input type="radio" id="garlic" name="garlic" value="garlic">
+    <label for="garlic">Doesn't Like Garlic</label><br>
+    <input type="radio" id="shadow" name="shadow" value="shadow">
+    <label for="shadow">Has No Shadow</label><br>
+    <input type="radio" id="pale" name="pale" value="pale">
+    <label for="pale">Has a Pale Complexion</label>
+    <br><br>
+    <button type="button" onclick="addClassmate(document.getElementById('fname').value.toString(),document.getElementById('lname').value.toString(),document.getElementById('garlic').value,document.getElementById('shadow').value,document.getElementById('pale').value)">Add</button>
+
+</form>
+
+<table id="classmate_table" class="table table-bordered" >
+    <caption>Classmates</caption>
+    <thead>
+      <tr>
+        <th>First</th>
+        <th>Last</th>
+        <th>Hates Garlic</th>
+        <th>No Shadow</th>
+        <th>Pale</th>
+      </tr>
+    </thead>
+  </table>
+    
 </body>
