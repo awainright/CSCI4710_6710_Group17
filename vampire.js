@@ -42,16 +42,16 @@ var num_humans;
     }
    
 
-    function addClassmate(fname,lname,g,s,p,ind,o){
+    function addClassmate(){
         var form = document.getElementById('adding');
-        var fName = fname;
-        var lName = lname;
-        var garlic = g;
-        var shadow = s;
-        var pale = p;
+        var fName = document.getElementById('fname').value.toString();
+        var lName = document.getElementById('lname').value.toString();
+        var garlic = document.getElementById('garlic').checked;
+        var shadow = document.getElementById('shadow').checked;
+        var pale = document.getElementById('pale').checked;
         var vampire = false;
-        var x = ind;
-        var y = o;
+        var x = document.getElementById('mySelect').selectedIndex;
+        var y = document.getElementById('mySelect').options;
         
         if(y[x].text == "Threshold Based Method"){
             vampire = threshold(garlic,shadow,pale);
