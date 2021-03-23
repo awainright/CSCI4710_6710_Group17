@@ -20,8 +20,8 @@ h1 {
   font-size: 300%;
 }
 h4 {
-    
-  color: black;
+  text-align: center;
+  color: cornflowerblue;
   font-family: verdana;
   font-size: 170%;
 }
@@ -48,11 +48,12 @@ p {
 a{
     color: blue;
 }
-table, th, td{
+#users, th, td{
          border: 1px solid black;
-       align-self: center;
-         padding: 20px;
-         margin: 10px;
+         margin-left:auto;
+         margin-right:auto;
+         padding: 30px;
+         
          background-color: white;
          color: black;
 }
@@ -102,11 +103,11 @@ table, th, td{
       <option value='2'>Threshold Based Method</option>
     </select>
     <br><br>
-    <button type="button"onclick="addClassmate(document.getElementById('fname').value.toString(),document.getElementById('lname').value.toString(),document.getElementById('garlic').checked,document.getElementById('garlic').checked,document.getElementById('pale').checked,document.getElementById('mySelect').selectedIndex,document.getElementById('mySelect').options);">Add</button><br>
+    <button type="button"onclick="addClassmate()">Add</button><br>
     <button type="button"onclick="window.localStorage.clear(); location.reload();">Delete Table</button>
 
 </form>
-    
+<h4>Current Class Members</h4><br><br>
 <table id = "users">
     <thead>
     <tr>
