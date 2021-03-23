@@ -2,7 +2,7 @@ if( JSON.parse(localStorage.getItem("list")) == null){
    var list = new Array();
 }else{
     var list = JSON.parse(localStorage.getItem("list"));
-    //ßpopulateTable();
+   
 }
 
 var num_vampire;
@@ -43,6 +43,7 @@ var num_humans;
    
 
     function addClassmate(fname,lname,g,s,p,ind,o){
+        var form = document.getElementById('adding');
         var fName = fname;
         var lName = lname;
         var garlic = g;
@@ -54,15 +55,16 @@ var num_humans;
         
         if(y[x].text == "Threshold Based Method"){
             vampire = threshold(garlic,shadow,pale);
-            window.alert(y[x].text);
+           
         }else{
             vampire = random();
-            window.alert(y[x].text);
+           
         }
         var person = {firstname: fName, lastname: lName, noGarlic: garlic, noShadow: shadow, isPale: pale, isVampire: vampire };
         list.push(person);
         localStorage.setItem("list", JSON.stringify(list));
-        
+        addToTable(person);
+        form.reset();
         
     
         
@@ -80,7 +82,7 @@ var num_humans;
         }
         num_humans = human;
         num_vampire = vamps;
-        window.alert("Vampires: "+num_vampire+" Humans: "+num_humans);
+        
         
     }
 
@@ -117,22 +119,21 @@ var num_humans;
 									'height': 300};
 
 			chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            
 			chart.draw(data, options);
+           
 
 		}
-    function clear(){
-        sessionStorage.clear();
-    }
+
 //This doeasnt work... I dont think we need it though.
 
 
-/*function populateTable() {
+function populateTable() {
         var table = document.getElementById("users");
-        
-
         var users = JSON.parse(localStorage.getItem("list")); // Retrieving
-
-
+        if(users == null){
+            return;
+        }else{
             //TABLE ROWS
             for (i = 0; i < users.length; i++) {
                 
@@ -158,6 +159,33 @@ var num_humans;
            
                 
             }
+        }
+
+            
 
 
-        }*/
+        }
+
+function addToTable(newPerson){
+    var table = document.getElementById("users");
+    var index = table.rows.length;
+    var row = table.insertRow(index);
+    var cell1 = row.insertCell(0);
+    cell1.innerHTML = newPerson.firstname;
+                
+    var cell2 = row.insertCell(1);
+    cell2.innerHTML = newPerson.lastname;
+              
+    var cell3 = row.insertCell(2);
+    cell3.innerHTML = newPerson.noGarlic;
+            
+    var cell4 = row.insertCell(3);
+    cell4.innerHTML = newPerson.noShadow;
+               
+    var cell5 = row.insertCell(4);
+    cell5.innerHTML = newPerson.isPale;
+        
+    var cell6 = row.insertCell(5);
+    cell6.innerHTML = newPerson.isVampire;
+                
+}

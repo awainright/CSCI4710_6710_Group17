@@ -48,14 +48,14 @@ p {
 a{
     color: blue;
 }
-     table, th, td{
+table, th, td{
          border: 1px solid black;
        align-self: center;
          padding: 20px;
          margin: 10px;
          background-color: white;
          color: black;
-     }
+}
      
   </style>
 
@@ -103,7 +103,7 @@ a{
     </select>
     <br><br>
     <button type="button"onclick="addClassmate(document.getElementById('fname').value.toString(),document.getElementById('lname').value.toString(),document.getElementById('garlic').checked,document.getElementById('garlic').checked,document.getElementById('pale').checked,document.getElementById('mySelect').selectedIndex,document.getElementById('mySelect').options);">Add</button><br>
-    <button type="button"onclick="count()">Count</button>
+    <button type="button"onclick="window.localStorage.clear(); location.reload();">Delete Table</button>
 
 </form>
     
@@ -119,5 +119,8 @@ a{
     </tr>
     </thead>
     </table>
+    <script>
+    populateTable();
+    </script>
 
 </body>
