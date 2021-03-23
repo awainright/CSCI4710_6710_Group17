@@ -11,55 +11,6 @@
 
 	<script src="vampire.js" type="text/javascript"></script>
 
-	<script type="text/javascript">
-
-		//Load the Visualization API and the corechart package
-		google.charts.load('current', {'packages':['corechart']});
-
-		//Set a callback to run when the Google Visualization API is loaded
-		google.charts.setOnLoadCallback(drawChart); 
-
-		var chart;
-		var data;
-		var options;
-		var num_humans = 50;
-		var num_vampire = 5; 
-		//Get reference to list from add.html
-		
-
-		//TODO: loop for getting the number from list for humans and vampire
-		var i;
-		for (i = 0; i < list.length; i++) {
-			if (list[i].vampire) {
-				num_vampire++
-			}
-			else {
-				num_humans++
-			}
-		}
-		
-		function drawChart() {
-
-			// Create the data table
-			data = new google.visualization.DataTable();
-			data.addColumn('string', 'Element');
-			data.addColumn('number', 'Number');
-			data.addRows([
-				['Human', num_humans],
-				['Vampire', num_vampire]
-			]);
-
-			//Set chart options
-			options = {'title': 'How many vampires in the class',
-									'width': 400,
-									'height': 300};
-
-			chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-			chart.draw(data, options);
-
-		}
-
-	</script>
 <style>
 		 
 body{
