@@ -8,45 +8,7 @@
 	<InvalidTag src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<InvalidTag src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script type="text/javascript">
-
-		//Load the Visualization API and the corechart package
-		google.charts.load('current', {'packages':['corechart']});
-
-		//Set a callback to run when the Google Visualization API is loaded
-		google.charts.setOnLoadCallback(drawChart); 
-
-		var chart;
-		var data;
-		var options;
-
-
-		//TODO: loop for getting the number from list for humans and vampire
-		var num_humans = 50;
-		var num_vampire = 5; 
-
-		function drawChart() {
-
-			// Create the data table
-			data = new google.visualization.DataTable();
-			data.addColumn('string', 'Element');
-			data.addColumn('number', 'Number');
-			data.addRows([
-				['Human', num_humans],
-				['Vampire', num_vampire]
-			]);
-
-			//Set chart options
-			options = {'title': 'How many vampires in the class',
-									'width': 400,
-									'height': 300};
-
-			chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-			chart.draw(data, options);
-
-		}
-
-	</script>
+	<script src="vampire.js" type="text/javascript"></script>
 <style>
 		 
 body{
@@ -69,6 +31,11 @@ p {
 	font-size: 130%;
 	
 }
+    button{
+        margin: 10px;
+        background-color: blue;
+        color: green;
+    }
 
  
 a {
@@ -102,5 +69,7 @@ a {
 		<p>The current vampire percentage</p>
 
 		<div id="chart_div"></div>
+    
+        <button type="button"onclick="clear()">Remove Data</button><br>
 </div>
 </body>
