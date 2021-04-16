@@ -1,14 +1,16 @@
-import os
-from flask import Flask, request, render_template
 import json
-import util
+import os
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template
 
 # get current app directory
 dir_path = os.path.dirname(os.path.realpath(__file__))
 UPLOAD_FOLDER = dir_path + '/data/'
 
 app = Flask(__name__)
-app.config['DATA_FILE'] = UPLOAD_FOLDER + 'NRDC_data.csv'
+app.config['SQLACLCHEMY_DATABASE_URI'] = UPLOAD_FOLDER + 'NRDC_data.csv'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
 # list all country names with survey data
 SURVEY_DATA_COUNTRY = ['China', 'United States of America', 'United Kingdom']
