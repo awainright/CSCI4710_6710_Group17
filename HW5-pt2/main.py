@@ -1,9 +1,14 @@
-from flask import Flask, render_template
+import os
+from flask import Flask, request, render_template
 import json
 import util
 
+# get current app directory
+dir_path = os.path.dirname(os.path.realpath(__file__))
+UPLOAD_FOLDER = dir_path + '/data/'
 
 app = Flask(__name__)
+app.config['DATA_FILE'] = UPLOAD_FOLDER + 'NRDC_data.csv'
 
 # list all country names with survey data
 SURVEY_DATA_COUNTRY = ['China', 'United States of America', 'United Kingdom']
