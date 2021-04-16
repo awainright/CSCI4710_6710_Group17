@@ -38,7 +38,7 @@ def query_survey_results(country_name=''):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('basic_map_datamaps.html')
 
 
 if __name__ == '__main__':
