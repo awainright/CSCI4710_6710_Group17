@@ -72,16 +72,67 @@ db.create_all()
 with open('data/t.csv', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile)
     next(reader)
-    # print(df)
     for line in reader:
-        # print(line[0])
         response = Survey(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8], line[9],
                           line[10], line[11], line[12])
         db.session.add(response)
         db.session.commit()
 
+column_names = ["index","What country do you live in?","How old are you?","What is your gender?","To what extent do you feel FEAR due to the coronavirus?","To what extent do you feel ANXIOUS due to the coronavirus?","To what extent do you feel ANGRY due to the coronavirus?","To what extent do you feel HAPPY due to the coronavirus?","To what extent do you feel SAD due to the coronavirus?","Which emotion is having the biggest impact on you?","What makes you feel that way?","What brings you the most meaning during the coronavirus outbreak?","What is your occupation?"]
+
 query0 = db.session.query(Survey).all()
-print(query0)
+query1 = db.session.query(Survey).filter(Survey.gender == "Male").filter(Survey.age <= 35).all()
+query2 = db.session.query(Survey).filter(Survey.age >= 36, Survey.gender == "Male").all()
+query3 = db.session.query(Survey).filter(Survey.age <= 35, Survey.gender == "Female").all()
+query4 = db.session.query(Survey).filter(Survey.age >= 36, Survey.gender == "Female").all()
+
+query1_1 = db.session.query(Survey).filter(Survey.country == "USA",Survey.gender == "Male",Survey.age <= 35).all()
+query1_2 = db.session.query(Survey).filter(Survey.country == "Romania",Survey.gender == "Male",Survey.age <= 35).all()
+query1_3 = db.session.query(Survey).filter(Survey.country == "UK",Survey.gender == "Male",Survey.age <= 35).all()
+query1_4 = db.session.query(Survey).filter(Survey.country == "Canada",Survey.gender == "Male",Survey.age <= 35).all()
+query1_5 = db.session.query(Survey).filter(Survey.country == "Switzerland",Survey.gender == "Male",Survey.age <= 35).all()
+query1_6 = db.session.query(Survey).filter(Survey.country == "Rwanda",Survey.gender == "Male",Survey.age <= 35).all()
+query1_7 = db.session.query(Survey).filter(Survey.country == "Ireland l",Survey.gender == "Male",Survey.age <= 35).all()
+query1_8 = db.session.query(Survey).filter(Survey.country == "Germany",Survey.gender == "Male",Survey.age <= 35).all()
+query1_9 = db.session.query(Survey).filter(Survey.country == "Israel",Survey.gender == "Male",Survey.age <= 35).all()
+
+query2_1 = db.session.query(Survey).filter(Survey.country == "USA",Survey.gender == "Male",Survey.age > 35).all()
+query2_2 = db.session.query(Survey).filter(Survey.country == "Romania",Survey.gender == "Male",Survey.age > 35).all()
+query2_3 = db.session.query(Survey).filter(Survey.country == "UK",Survey.gender == "Male",Survey.age > 35).all()
+query2_4 = db.session.query(Survey).filter(Survey.country == "Canada",Survey.gender == "Male",Survey.age > 35).all()
+query2_5 = db.session.query(Survey).filter(Survey.country == "Switzerland",Survey.gender == "Male",Survey.age > 35).all()
+query2_6 = db.session.query(Survey).filter(Survey.country == "Rwanda",Survey.gender == "Male",Survey.age > 35).all()
+query2_7 = db.session.query(Survey).filter(Survey.country == "France",Survey.gender == "Male",Survey.age > 35).all()
+query2_8 = db.session.query(Survey).filter(Survey.country == "Germany",Survey.gender == "Male",Survey.age > 35).all()
+query2_9 = db.session.query(Survey).filter(Survey.country == "New Zealand",Survey.gender == "Male",Survey.age > 35).all()
+query2_10 = db.session.query(Survey).filter(Survey.country == "spain",Survey.gender == "Male",Survey.age > 35).all()
+#Not sure whats wrong with query2_11
+query2_11 = db.session.query(Survey).filter(Survey.country == "Palestine",Survey.gender == "Male",Survey.age > 35).all()
+
+
+query3_1 = db.session.query(Survey).filter(Survey.country == "USA",Survey.gender == "Female",Survey.age <= 35).all()
+query3_2 = db.session.query(Survey).filter(Survey.country == "Romania",Survey.gender == "Female",Survey.age <= 35).all()
+query3_3 = db.session.query(Survey).filter(Survey.country == "UK",Survey.gender == "Female",Survey.age <= 35).all()
+query3_4 = db.session.query(Survey).filter(Survey.country == "Canada",Survey.gender == "Female",Survey.age <= 35).all()
+query3_5 = db.session.query(Survey).filter(Survey.country == "Switzerland",Survey.gender == "Female",Survey.age <= 35).all()
+query3_6 = db.session.query(Survey).filter(Survey.country == "Rwanda",Survey.gender == "Female",Survey.age <= 35).all()
+#should contain 1
+query3_7 = db.session.query(Survey).filter(Survey.country == "China",Survey.gender == "Female",Survey.age <= 35).all()
+query3_8 = db.session.query(Survey).filter(Survey.country == "Germany",Survey.gender == "Female",Survey.age <= 35).all()
+query3_9 = db.session.query(Survey).filter(Survey.country == "Australia",Survey.gender == "Female",Survey.age <= 35).all()
+query3_10 = db.session.query(Survey).filter(Survey.country == "Portugal",Survey.gender == "Female",Survey.age <= 35).all()
+query3_11 = db.session.query(Survey).filter(Survey.country == "Colombia",Survey.gender == "Female",Survey.age <= 35).all()
+query3_12 = db.session.query(Survey).filter(Survey.country == "Cyprus",Survey.gender == "Female",Survey.age <= 35).all()
+
+query4_1 = db.session.query(Survey).filter(Survey.country == "USA",Survey.gender == "Female",Survey.age > 35).all()
+query4_2 = db.session.query(Survey).filter(Survey.country == "Romania",Survey.gender == "Female",Survey.age > 35).all()
+query4_3 = db.session.query(Survey).filter(Survey.country == "UK",Survey.gender == "Female",Survey.age > 35).all()
+query4_4 = db.session.query(Survey).filter(Survey.country == "Canada",Survey.gender == "Female",Survey.age > 35).all()
+query4_5 = db.session.query(Survey).filter(Survey.country == "Switzerland",Survey.gender == "Female",Survey.age > 35).all()
+#should contain 1
+query4_6 = db.session.query(Survey).filter(Survey.country == "Australia",Survey.gender == "Female",Survey.age > 35).all()
+query4_7 = db.session.query(Survey).filter(Survey.country == "Portugal",Survey.gender == "Female",Survey.age > 35).all()
+query4_8 = db.session.query(Survey).filter(Survey.country == "Germany",Survey.gender == "Female",Survey.age > 35).all()
 
 
 @app.route('/')

@@ -1,45 +1,29 @@
-import json
-from datetime import datetime, timedelta
-from random import shuffle
+from sklearn.cluster import KMeans
+import numpy as np
 
-def parse_team(query_result):
+
+def cluster_user_data(input_data, emotional_col_start=4, emotional_col_end=9, n_clusters=3):
 	'''
-	this function jsonifies team query results
+	This function cluster user data based on KMeans algorithm
+	By default, it will split your data into three groups
+	'''
+	# collect answers for five emotional questions
+	# which are located from 4th col to 9th col
+	emotional_data = [i[emotional_col_start:emotional_col_end] for i in input_data]
+	# use kmeans to cluster data
+	kmeans = KMeans(n_clusters).fit(emotional_data)
+	# return cluster labels
+	return kmeans.labels_
+
+def split_user_data(input_data, labels, n_clusters=3):
+	'''
+	this function will split input data into groups
+	based on labels
 	'''
 	result_list = []
-	for element in query_result:
-		result_list.append({'team_name': element.name, 'id': element.id})
-	# print({'all_teams':result_list})
-	return json.dumps({'all_teams':result_list})
+	for i in range(n_clusters):
+		# find indices of each group elements, without [0] the result is tuple
+		tmp_indices = np.where(labels == i)[0]
+		result_list.append([input_data[i] for i in tmp_indices])
 
-
-def schedule(query_result, start_time1, start_time2, max_team_num, presentation_time):
-	'''
-	this function will schedule the team presentation 
-	'''
-	result_list = []
-	for element in query_result:
-		result_list.append({'team_name': element.name, 'id': element.id})
-	# randomly shuffle the team order
-	# arrary of dictionary [{},{},...]
-	shuffle(result_list)
-
-	# TODO check if number of team is less than max_team_num
-	# first day schedule
-	first_day = []
-	cur_time = start_time1
-	for i in range(max_team_num):
-		# json cannot handle time directly
-		first_day.append({'team':result_list[i], 'start_time': str(cur_time)})
-		cur_time = cur_time + timedelta(minutes=presentation_time)
-		# first_day is an array of dictionary [{'team':{'team_name': element.name, 'id': element.id}}, ...]
-
-	# second day schedule
-	second_day = []
-	cur_time = start_time2
-	left_team = len(result_list) - max_team_num
-	for i in range(left_team):
-		second_day.append({'team':result_list[i+max_team_num], 'start_time': str(cur_time)})
-		cur_time = cur_time + timedelta(minutes=presentation_time)
-
-	return json.dumps({'first_day':first_day, 'second_day':second_day})
+	return result_list
