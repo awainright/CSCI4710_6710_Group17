@@ -163,27 +163,41 @@ query4_7 = db.session.query(Survey).filter(Survey.country == "Portugal", Survey.
                                            Survey.age > 35).all()
 query4_8 = db.session.query(Survey).filter(Survey.country == "Germany", Survey.gender == "Female",
                                            Survey.age > 35).all()
+usaQuery = db.session.query(Survey).filter(Survey.country == "USA").all()
+canQuery = db.session.query(Survey).filter(Survey.country == "Canada").all()
+ukQuery = db.session.query(Survey).filter(Survey.country == "UK").all()
 
 
 # this is the code connected to d3_map
 @app.route('/api/query_survey_results/<country>', methods=['GET'])
 def query_survey_results(country=''):
+    print(country)
     if country == "United States of America":
         country = "USA"
+    if country == "United Kingdom":
+        country = "UK"
     for row in query0:
         if country == row.country:
             flag = True
             break
     if flag:
         survey_query_data = {'user_data': []}
-        for surveys in query3_1:
-            survey_query_data['user_data'].append(surveys.toList())
+        if country == "USA":
+            for surveys in usaQuery:
+                survey_query_data['user_data'].append(surveys.toList())
+        if country == "Canada":
+            for surveys in canQuery:
+                survey_query_data['user_data'].append(surveys.toList())
+        if country == "UK":
+            for surveys in ukQuery:
+                survey_query_data['user_data'].append(surveys.toList())
 
 
     else:
         survey_query_data = {'user_data': [country + " does not have any survey data"]}
 
     return json.dumps(survey_query_data)
+
 
 
 @app.route('/')
