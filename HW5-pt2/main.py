@@ -59,13 +59,17 @@ class Survey(db.Model):
 
     def __repr__(self):
         return "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (
-        self.index, self.country, self.age, self.gender, self.fearFactor, self.anxiousFactor, self.angerFactor,
-        self.happyFactor, self.sadFactor, self.emotionFactor, self.whyFactor, self.meaningFactor, self.job)
+            self.index, self.country, self.age, self.gender, self.fearFactor, self.anxiousFactor, self.angerFactor,
+            self.happyFactor, self.sadFactor, self.emotionFactor, self.whyFactor, self.meaningFactor, self.job)
 
     def __iter__(self):
         return iter(
             [self.index, self.country, self.age, self.gender, self.fearFactor, self.anxiousFactor, self.angerFactor,
              self.happyFactor, self.sadFactor, self.emotionFactor, self.whyFactor, self.meaningFactor, self.job])
+
+    def toList(self):
+        return [self.index, self.country, self.age, self.gender, self.fearFactor, self.anxiousFactor, self.angerFactor,
+                self.happyFactor, self.sadFactor, self.emotionFactor, self.whyFactor, self.meaningFactor, self.job]
 
 
 db.drop_all()
@@ -79,7 +83,14 @@ with open('data/t.csv', encoding='utf-8') as csvfile:
         db.session.add(response)
         db.session.commit()
 
-column_names = ["index","What country do you live in?","How old are you?","What is your gender?","To what extent do you feel FEAR due to the coronavirus?","To what extent do you feel ANXIOUS due to the coronavirus?","To what extent do you feel ANGRY due to the coronavirus?","To what extent do you feel HAPPY due to the coronavirus?","To what extent do you feel SAD due to the coronavirus?","Which emotion is having the biggest impact on you?","What makes you feel that way?","What brings you the most meaning during the coronavirus outbreak?","What is your occupation?"]
+column_names = ["index", "What country do you live in?", "How old are you?", "What is your gender?",
+                "To what extent do you feel FEAR due to the coronavirus?",
+                "To what extent do you feel ANXIOUS due to the coronavirus?",
+                "To what extent do you feel ANGRY due to the coronavirus?",
+                "To what extent do you feel HAPPY due to the coronavirus?",
+                "To what extent do you feel SAD due to the coronavirus?",
+                "Which emotion is having the biggest impact on you?", "What makes you feel that way?",
+                "What brings you the most meaning during the coronavirus outbreak?", "What is your occupation?"]
 
 query0 = db.session.query(Survey).all()
 query1 = db.session.query(Survey).filter(Survey.gender == "Male").filter(Survey.age <= 35).all()
@@ -87,86 +98,86 @@ query2 = db.session.query(Survey).filter(Survey.age >= 36, Survey.gender == "Mal
 query3 = db.session.query(Survey).filter(Survey.age <= 35, Survey.gender == "Female").all()
 query4 = db.session.query(Survey).filter(Survey.age >= 36, Survey.gender == "Female").all()
 
-query1_1 = db.session.query(Survey).filter(Survey.country == "USA",Survey.gender == "Male",Survey.age <= 35).all()
-query1_2 = db.session.query(Survey).filter(Survey.country == "Romania",Survey.gender == "Male",Survey.age <= 35).all()
-query1_3 = db.session.query(Survey).filter(Survey.country == "UK",Survey.gender == "Male",Survey.age <= 35).all()
-query1_4 = db.session.query(Survey).filter(Survey.country == "Canada",Survey.gender == "Male",Survey.age <= 35).all()
-query1_5 = db.session.query(Survey).filter(Survey.country == "Switzerland",Survey.gender == "Male",Survey.age <= 35).all()
-query1_6 = db.session.query(Survey).filter(Survey.country == "Rwanda",Survey.gender == "Male",Survey.age <= 35).all()
-query1_7 = db.session.query(Survey).filter(Survey.country == "Ireland l",Survey.gender == "Male",Survey.age <= 35).all()
-query1_8 = db.session.query(Survey).filter(Survey.country == "Germany",Survey.gender == "Male",Survey.age <= 35).all()
-query1_9 = db.session.query(Survey).filter(Survey.country == "Israel",Survey.gender == "Male",Survey.age <= 35).all()
+query1_1 = db.session.query(Survey).filter(Survey.country == "USA", Survey.gender == "Male", Survey.age <= 35).all()
+query1_2 = db.session.query(Survey).filter(Survey.country == "Romania", Survey.gender == "Male", Survey.age <= 35).all()
+query1_3 = db.session.query(Survey).filter(Survey.country == "UK", Survey.gender == "Male", Survey.age <= 35).all()
+query1_4 = db.session.query(Survey).filter(Survey.country == "Canada", Survey.gender == "Male", Survey.age <= 35).all()
+query1_5 = db.session.query(Survey).filter(Survey.country == "Switzerland", Survey.gender == "Male",
+                                           Survey.age <= 35).all()
+query1_6 = db.session.query(Survey).filter(Survey.country == "Rwanda", Survey.gender == "Male", Survey.age <= 35).all()
+query1_7 = db.session.query(Survey).filter(Survey.country == "Ireland l", Survey.gender == "Male",
+                                           Survey.age <= 35).all()
+query1_8 = db.session.query(Survey).filter(Survey.country == "Germany", Survey.gender == "Male", Survey.age <= 35).all()
+query1_9 = db.session.query(Survey).filter(Survey.country == "Israel", Survey.gender == "Male", Survey.age <= 35).all()
 
-query2_1 = db.session.query(Survey).filter(Survey.country == "USA",Survey.gender == "Male",Survey.age > 35).all()
-query2_2 = db.session.query(Survey).filter(Survey.country == "Romania",Survey.gender == "Male",Survey.age > 35).all()
-query2_3 = db.session.query(Survey).filter(Survey.country == "UK",Survey.gender == "Male",Survey.age > 35).all()
-query2_4 = db.session.query(Survey).filter(Survey.country == "Canada",Survey.gender == "Male",Survey.age > 35).all()
-query2_5 = db.session.query(Survey).filter(Survey.country == "Switzerland",Survey.gender == "Male",Survey.age > 35).all()
-query2_6 = db.session.query(Survey).filter(Survey.country == "Rwanda",Survey.gender == "Male",Survey.age > 35).all()
-query2_7 = db.session.query(Survey).filter(Survey.country == "France",Survey.gender == "Male",Survey.age > 35).all()
-query2_8 = db.session.query(Survey).filter(Survey.country == "Germany",Survey.gender == "Male",Survey.age > 35).all()
-query2_9 = db.session.query(Survey).filter(Survey.country == "New Zealand",Survey.gender == "Male",Survey.age > 35).all()
-query2_10 = db.session.query(Survey).filter(Survey.country == "spain",Survey.gender == "Male",Survey.age > 35).all()
-#Not sure whats wrong with query2_11
-query2_11 = db.session.query(Survey).filter(Survey.country == "Palestine",Survey.gender == "Male",Survey.age > 35).all()
+query2_1 = db.session.query(Survey).filter(Survey.country == "USA", Survey.gender == "Male", Survey.age > 35).all()
+query2_2 = db.session.query(Survey).filter(Survey.country == "Romania", Survey.gender == "Male", Survey.age > 35).all()
+query2_3 = db.session.query(Survey).filter(Survey.country == "UK", Survey.gender == "Male", Survey.age > 35).all()
+query2_4 = db.session.query(Survey).filter(Survey.country == "Canada", Survey.gender == "Male", Survey.age > 35).all()
+query2_5 = db.session.query(Survey).filter(Survey.country == "Switzerland", Survey.gender == "Male",
+                                           Survey.age > 35).all()
+query2_6 = db.session.query(Survey).filter(Survey.country == "Rwanda", Survey.gender == "Male", Survey.age > 35).all()
+query2_7 = db.session.query(Survey).filter(Survey.country == "France", Survey.gender == "Male", Survey.age > 35).all()
+query2_8 = db.session.query(Survey).filter(Survey.country == "Germany", Survey.gender == "Male", Survey.age > 35).all()
+query2_9 = db.session.query(Survey).filter(Survey.country == "New Zealand", Survey.gender == "Male",
+                                           Survey.age > 35).all()
+query2_10 = db.session.query(Survey).filter(Survey.country == "spain", Survey.gender == "Male", Survey.age > 35).all()
+# Not sure whats wrong with query2_11
+query2_11 = db.session.query(Survey).filter(Survey.country == "Palestine", Survey.gender == "Male",
+                                            Survey.age > 35).all()
+
+query3_1 = db.session.query(Survey).filter(Survey.country == "USA", Survey.gender == "Female", Survey.age <= 35).all()
+query3_2 = db.session.query(Survey).filter(Survey.country == "Romania", Survey.gender == "Female",
+                                           Survey.age <= 35).all()
+query3_3 = db.session.query(Survey).filter(Survey.country == "UK", Survey.gender == "Female", Survey.age <= 35).all()
+query3_4 = db.session.query(Survey).filter(Survey.country == "Canada", Survey.gender == "Female",
+                                           Survey.age <= 35).all()
+query3_5 = db.session.query(Survey).filter(Survey.country == "Switzerland", Survey.gender == "Female",
+                                           Survey.age <= 35).all()
+query3_6 = db.session.query(Survey).filter(Survey.country == "Rwanda", Survey.gender == "Female",
+                                           Survey.age <= 35).all()
+# should contain 1
+query3_7 = db.session.query(Survey).filter(Survey.country == "China", Survey.gender == "Female", Survey.age <= 35).all()
+query3_8 = db.session.query(Survey).filter(Survey.country == "Germany", Survey.gender == "Female",
+                                           Survey.age <= 35).all()
+query3_9 = db.session.query(Survey).filter(Survey.country == "Australia", Survey.gender == "Female",
+                                           Survey.age <= 35).all()
+query3_10 = db.session.query(Survey).filter(Survey.country == "Portugal", Survey.gender == "Female",
+                                            Survey.age <= 35).all()
+query3_11 = db.session.query(Survey).filter(Survey.country == "Colombia", Survey.gender == "Female",
+                                            Survey.age <= 35).all()
+query3_12 = db.session.query(Survey).filter(Survey.country == "Cyprus", Survey.gender == "Female",
+                                            Survey.age <= 35).all()
+
+query4_1 = db.session.query(Survey).filter(Survey.country == "USA", Survey.gender == "Female", Survey.age > 35).all()
+query4_2 = db.session.query(Survey).filter(Survey.country == "Romania", Survey.gender == "Female",
+                                           Survey.age > 35).all()
+query4_3 = db.session.query(Survey).filter(Survey.country == "UK", Survey.gender == "Female", Survey.age > 35).all()
+query4_4 = db.session.query(Survey).filter(Survey.country == "Canada", Survey.gender == "Female", Survey.age > 35).all()
+query4_5 = db.session.query(Survey).filter(Survey.country == "Switzerland", Survey.gender == "Female",
+                                           Survey.age > 35).all()
+# should contain 1
+query4_6 = db.session.query(Survey).filter(Survey.country == "Australia", Survey.gender == "Female",
+                                           Survey.age > 35).all()
+query4_7 = db.session.query(Survey).filter(Survey.country == "Portugal", Survey.gender == "Female",
+                                           Survey.age > 35).all()
+query4_8 = db.session.query(Survey).filter(Survey.country == "Germany", Survey.gender == "Female",
+                                           Survey.age > 35).all()
 
 
-query3_1 = db.session.query(Survey).filter(Survey.country == "USA",Survey.gender == "Female",Survey.age <= 35).all()
-query3_2 = db.session.query(Survey).filter(Survey.country == "Romania",Survey.gender == "Female",Survey.age <= 35).all()
-query3_3 = db.session.query(Survey).filter(Survey.country == "UK",Survey.gender == "Female",Survey.age <= 35).all()
-query3_4 = db.session.query(Survey).filter(Survey.country == "Canada",Survey.gender == "Female",Survey.age <= 35).all()
-query3_5 = db.session.query(Survey).filter(Survey.country == "Switzerland",Survey.gender == "Female",Survey.age <= 35).all()
-query3_6 = db.session.query(Survey).filter(Survey.country == "Rwanda",Survey.gender == "Female",Survey.age <= 35).all()
-#should contain 1
-query3_7 = db.session.query(Survey).filter(Survey.country == "China",Survey.gender == "Female",Survey.age <= 35).all()
-query3_8 = db.session.query(Survey).filter(Survey.country == "Germany",Survey.gender == "Female",Survey.age <= 35).all()
-query3_9 = db.session.query(Survey).filter(Survey.country == "Australia",Survey.gender == "Female",Survey.age <= 35).all()
-query3_10 = db.session.query(Survey).filter(Survey.country == "Portugal",Survey.gender == "Female",Survey.age <= 35).all()
-query3_11 = db.session.query(Survey).filter(Survey.country == "Colombia",Survey.gender == "Female",Survey.age <= 35).all()
-query3_12 = db.session.query(Survey).filter(Survey.country == "Cyprus",Survey.gender == "Female",Survey.age <= 35).all()
-
-query4_1 = db.session.query(Survey).filter(Survey.country == "USA",Survey.gender == "Female",Survey.age > 35).all()
-query4_2 = db.session.query(Survey).filter(Survey.country == "Romania",Survey.gender == "Female",Survey.age > 35).all()
-query4_3 = db.session.query(Survey).filter(Survey.country == "UK",Survey.gender == "Female",Survey.age > 35).all()
-query4_4 = db.session.query(Survey).filter(Survey.country == "Canada",Survey.gender == "Female",Survey.age > 35).all()
-query4_5 = db.session.query(Survey).filter(Survey.country == "Switzerland",Survey.gender == "Female",Survey.age > 35).all()
-#should contain 1
-query4_6 = db.session.query(Survey).filter(Survey.country == "Australia",Survey.gender == "Female",Survey.age > 35).all()
-query4_7 = db.session.query(Survey).filter(Survey.country == "Portugal",Survey.gender == "Female",Survey.age > 35).all()
-query4_8 = db.session.query(Survey).filter(Survey.country == "Germany",Survey.gender == "Female",Survey.age > 35).all()
-
-#this is the code connected to d3_map
+# this is the code connected to d3_map
 @app.route('/api/query_survey_results/<country>', methods=['GET'])
 def query_survey_results(country=''):
-    if country in query0:
-        # this data should be from database
-        survey_query_data = {
-            'user_data': [
-                # index	What country do you live in?	How old are you?	What is your gender?	To what extent do you feel FEAR due to the coronavirus?	To what extent do you feel ANXIOUS due to the coronavirus?	To what extent do you feel ANGRY due to the coronavirus?	To what extent do you feel HAPPY due to the coronavirus?	To what extent do you feel SAD due to the coronavirus?	Which emotion is having the biggest impact on you?	What makes you feel that way?	What brings you the most meaning during the coronavirus outbreak?	What is your occupation?
-                [1, "USA", 70.0, "Male", 2, 2, 1, 2, 2, "anticipation of whats going to happen next",
-                 "Lot's of predictions from differnet resources", "Family,Psychologist"],
-                [2, "Switzerland", 25.0, "Female", 3, 4, 3, 4, 4,
-                 "A mix of awe and anxiety. Awe at how wonderful of a challenge this is for our world to tackle together (especially on issues that have plagued us for decades) and anxiety on how much we may not be thinking about those who are most vulnerable",
-                 "Reading thought leadership articles and social media", "Reading,Global Public Servant (WEF)"],
-                [3, "USA", 26.0, "Female", 3, 3, 1, 4, 4,
-                 "A mix of happy to be safe and home and sad for people who aren’t",
-                 "Seeing what’s happening in the news", "Family,Student"],
-                [4, "USA", 11.0, "Male", 2, 1, 5, 1, 3, "Anger,No sports", "Family,Student"],
-                [5, "USA", 28.0, "Male", 4, 3, 4, 1, 4, "Anger",
-                 "a system that cares about profit more than general wellbeing", "trying to help", "reporter"],
-                [6, "USA", 24.0, "Female", 4, 4, 5, 1, 4, "Anger", "The US federal government", "Friends",
-                 "Graduate student"],
-                [7, "USA", 21.0, "Female", 4, 3, 5, 3, 2, "Anger",
-                 "People are not being responsible in doing their part in staying in doors. It is causing a major spread in our environment. Due to this spread, I am not allowed to be outdoors or stay in my apartment in Austin. I am very active outside, so this is a challenge for me to stay inside. ",
-                 "Being alone,Student"],
-                [8, "USA", 22.0, "Male", 3, 4, 5, 2, 1, "Anger", "Inaction of the people and government", "Friends",
-                 "Janitor"],
-                [9, "USA", 39.0, "Male", 2, 2, 4, 1, 2, "Anger", "Impacts on day-to-day life", "Exercising",
-                 "Software Engineer"],
-                [10, "USA", 78.0, "Male", 5, 5, 5, 1, 1, "Anger", "National leadership incompetence", "Family",
-                 "Executive - retired"]
-            ]
-        }
+    if country == "United States of America":
+        country = "USA"
+    for row in query0:
+        if country == row.country:
+            flag = True
+            break
+    if flag:
+        survey_query_data = {'user_data': []}
+        for surveys in query3_1:
+            survey_query_data['user_data'].append(surveys.toList())
 
 
     else:
