@@ -184,7 +184,7 @@ def query_survey_results(country=''):
 
     if flag:
         temp_query = db.session.query(Survey).filter(Survey.country == country).all()
-        print(temp_query)
+        #print(temp_query)
         survey_query_data = {'user_data': []}
         for surveys in temp_query:
             survey_query_data['user_data'].append(surveys.toList())
@@ -193,12 +193,43 @@ def query_survey_results(country=''):
 
     return json.dumps(survey_query_data)
 
-
-
 @app.route('/')
 def index():
-    return render_template('d3_map.html')
+    return render_template('index.html', column_html=column_names, data_html=query0)
 
+
+@app.route("/group1")
+def group1():
+    return render_template("group1.html", column_html=column_names, data_html=query1, data1_html=query1_1,
+                           data2_html=query1_2, data3_html=query1_3, data4_html=query1_4, data5_html=query1_5,
+                           data6_html=query1_6, data7_html=query1_7, data8_html=query1_8, data9_html=query1_9)
+
+
+@app.route("/group2")
+def group2():
+    return render_template("group2.html", column_html=column_names, data_html=query2, data1_html=query2_1,
+                           data2_html=query2_2, data3_html=query2_3, data4_html=query2_4, data5_html=query2_5,
+                           data6_html=query2_6, data7_html=query2_7, data8_html=query2_8, data9_html=query2_9,
+                           data10_html=query2_10, data11_html=query2_11)
+
+
+@app.route("/group3")
+def group3():
+    return render_template("group3.html", column_html=column_names, data_html=query3, data1_html=query3_1,
+                           data2_html=query3_2, data3_html=query3_3, data4_html=query3_4, data5_html=query3_5,
+                           data6_html=query3_6, data7_html=query3_7, data8_html=query3_8, data9_html=query3_9,
+                           data10_html=query3_10, data11_html=query3_11, data12_html=query3_12)
+
+
+@app.route("/group4")
+def group4():
+    return render_template("group4.html", column_html=column_names, data_html=query4, data1_html=query4_1,
+                           data2_html=query4_2, data3_html=query4_3, data4_html=query4_4, data5_html=query4_5,
+                           data6_html=query4_6, data7_html=query4_7, data8_html=query4_8)
+
+@app.route("/d3_map")
+def d3_map():
+    return render_template("d3_map.html")
 
 if __name__ == '__main__':
     # set debug mode
