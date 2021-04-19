@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 import util
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -184,14 +184,16 @@ def query_survey_results(country=''):
 
     if flag:
         temp_query = db.session.query(Survey).filter(Survey.country == country).all()
-        #print(temp_query)
+        # print(temp_query)
         survey_query_data = {'user_data': []}
         for surveys in temp_query:
             survey_query_data['user_data'].append(surveys.toList())
+        # return redirect(url_for('results', country=country))
     else:
         survey_query_data = {'user_data': [country + " does not have any survey data"]}
 
     return json.dumps(survey_query_data)
+
 
 @app.route('/')
 def index():
@@ -227,9 +229,24 @@ def group4():
                            data2_html=query4_2, data3_html=query4_3, data4_html=query4_4, data5_html=query4_5,
                            data6_html=query4_6, data7_html=query4_7, data8_html=query4_8)
 
+
 @app.route("/d3_map")
 def d3_map():
     return render_template("d3_map.html")
+
+
+# Used to visualize a specific country data when clicked on the d3_map
+# does not redirect like it should
+@app.route('/results/<country>')
+def results(country=''):
+    temp_query = db.session.query(Survey).filter(Survey.country == country).all()
+    return render_template("results.html", column_html=column_names, data_html=temp_query)
+
+#says it can't see d3.v3.min.js
+@app.route('/ontology')
+def ontology():
+    return render_template('ontology.html')
+
 
 if __name__ == '__main__':
     # set debug mode
