@@ -168,9 +168,11 @@ canQuery = db.session.query(Survey).filter(Survey.country == "Canada").all()
 ukQuery = db.session.query(Survey).filter(Survey.country == "UK").all()
 
 
+
 # this is the code connected to d3_map
-@app.route('/api/query_survey_results/<country>', methods=['GET'])
-def query_survey_results(country=''):
+
+@app.route("/api/results/<country>", methods=['GET'])
+def results(country=''):
     if country == "United States of America":
         country = "USA"
     if country == "United Kingdom":
@@ -190,9 +192,11 @@ def query_survey_results(country=''):
             survey_query_data['user_data'].append(surveys.toList())
         # return redirect(url_for('results', country=country))
     else:
+        temp_query = []
         survey_query_data = {'user_data': [country + " does not have any survey data"]}
 
-    return json.dumps(survey_query_data)
+    # return json.dumps(survey_query_data)
+    return render_template("results.html", column_html=column_names, data_html=temp_query)
 
 
 @app.route('/')
@@ -237,12 +241,9 @@ def d3_map():
 
 # Used to visualize a specific country data when clicked on the d3_map
 # does not redirect like it should
-@app.route('/results/<country>')
-def results(country=''):
-    temp_query = db.session.query(Survey).filter(Survey.country == country).all()
-    return render_template("results.html", column_html=column_names, data_html=temp_query)
 
-#says it can't see d3.v3.min.js
+
+# says it can't see d3.v3.min.js
 @app.route('/ontology')
 def ontology():
     return render_template('ontology.html')
