@@ -19,5 +19,5 @@ def shows():
     
 if __name__ == "__main__":
     app.run()
-    ip = '127.0.0.1'
+    ip = '127.0.0.0'
     app.run(host=ip)
