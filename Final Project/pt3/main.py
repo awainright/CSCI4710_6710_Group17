@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-
+# for storing band members info
 class Band(db.Model):
     __tablename__ = 'band'
     id = db.Column(db.Integer, primary_key=True)
@@ -33,7 +33,7 @@ class Band(db.Model):
     def __iter__(self):
         return iter([self.id, self.name, self.phone, self.email])
 
-
+# storing the band members
 db.drop_all()
 db.create_all()
 mike = Band(id=1, name='Mike', phone='919-099-1234', email='sunsetmike@gmail.com')
@@ -43,25 +43,32 @@ dave = Band(id=4, name='Dave', phone='919-595-9565', email='sunsetdave@gmail.com
 db.session.add_all([mike, austin, james, dave])
 db.session.commit()
 
+# column names is for displaying to the table in connect.html
 column_names = ["Place", "Name", "Phone", "Email"]
+
+# query is the band members to be passed to connect.html
 query = db.session.query(Band).all()
-print(query)
 
 
+# home page of the band
 @app.route("/")
 def home():
     return render_template("home.html")
 
 
+# about the band members with picture, info, and equipment they use
 @app.route("/about")
 def about():
     return render_template("about.html")
 
 
+# upcoming shows for the band
 @app.route("/shows")
 def shows():
     return render_template("shows.html")
 
+
+# connect to the band with ways to connect to them and music by the band
 @app.route("/connect")
 def connecting():
     return render_template("connecting.html", column_html=column_names, data_html=query)
