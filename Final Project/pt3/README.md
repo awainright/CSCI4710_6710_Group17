@@ -1,4 +1,10 @@
-TODO: Connecting Fans tab
-TODO: A submission within connecting fans to submit a name and number
-TODO: Database to store fans
-TODO: Display fans either on a new page or the same page as a table
+Authors:
+Lane Young and Adam Wainright
+
+Project:
+Band website for Sunset Cedar
+
+Database:
+Band members and info
+
+
